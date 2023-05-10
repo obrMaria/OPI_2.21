@@ -84,8 +84,8 @@ def add_student(
     """
     conn = sqlite3.connect(database_path)
     cursor = conn.cursor()
-    # Получить идентификатор должности в базе данных.
-    # Если такой записи нет, то добавить информацию о новой должности.
+    # Получить идентификатор группы в базе данных.
+    # Если такой записи нет, то добавить информацию о новой группе.
     cursor.execute(
         """
         SELECT group_id FROM groupss WHERE group_num = ?
@@ -125,7 +125,7 @@ def select_all(database_path: Path) -> t.List[t.Dict[str, t.Any]]:
         """
         SELECT students.student_name, groupss.group_num, students.students_marks
         FROM students
-        INNER JOIN groupss ON groupss.group_id = group_id.group_id
+        INNER JOIN groupss ON groupss.group_id = students.group_id
         """
     )
     rows = cursor.fetchall()
